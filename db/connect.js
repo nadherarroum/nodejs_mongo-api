@@ -1,5 +1,12 @@
 const mongoose = require('mongoose');
+const config = require('config');
+const dbDebug = require('debug')('app:db');
 
-mongoose.connect('mongodb+srv://nadheruser:Password@cluster0.7idrp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-        .then(()=> console.log('MongoDB is UP'))
-        .then((err)=> console.log('MongoDB is Down : '+err));
+if(!config.has('DB.password')){
+    dbDebug('DB password is not setted');
+    process.exit(0);
+}
+
+mongoose.connect('mongodb+srv://'+config.get('DB.username')+':'+config.get('DB.password')+config.get('DB.host'))
+        .then(()=> dbDebug('MongoDB is UP.'))
+        .catch((err)=> dbDebug('MongoDB is Down : '+err));

@@ -1,6 +1,6 @@
 {
     "DB" :{
-        "username" : "nadher",
+        "username" : "nadheruser",
         "host": "@cluster0.7idrp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
     }
 }
