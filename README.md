@@ -8,6 +8,7 @@
 > npm install mongoose
 > npm i debug
 > npm i config
+> npm i joi
 ```
 
 ## Environment variable
