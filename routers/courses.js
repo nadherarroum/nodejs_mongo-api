@@ -19,4 +19,19 @@ router.post('', async (req,res)=>{
     res.send(course);
 });
 
+// get all documents from courses by title
+router.get('/title/:t', async (req,res) => {
+    let course = await Course.find({title : req.params.t});
+    res.send(course);
+});
+
+// get all documents from courses start with
+router.get('/title/start/:prefixe', async (req,res) => {
+    let course = await Course.find({title : new RegExp('^'+req.params.prefixe,'i')},'title author price -_id')
+                            .sort({author : 1, price : -1}) // sort by author ASC and price DESC
+                            .limit(2)
+                            .skip(1);
+    res.send(course);
+});
+
 module.exports=router;
