@@ -33,5 +33,30 @@ router.get('/title/start/:prefixe', async (req,res) => {
                             .skip(1);
     res.send(course);
 });
+/* Operators :
+    $eq, $neq
+    $lt, $lte, $gt, $gte
+    $in, $nin
+*/
+
+// get all documents from courses with price > val
+router.get('/price/over/:p', async (req,res) => {
+    let course = await Course.find({price : {$gte : req.params.p}});
+    res.send(course);
+});
+
+// get all documents from courses with price < val
+router.get('/price/under/:p', async (req,res) => {
+    let course = await Course.find({price : {$lte : req.params.p}});
+    res.send(course);
+});
+
+// get all documents from courses with price val
+router.get('/price/in/:minp/:maxp', async (req,res) => {
+    //let course = await Course.find({price : {$lte : req.params.maxp, $gte : req.params.minp}});
+    let course = await Course.find({price : {$lte : req.params.maxp}})
+                             .and({price : {$gte : req.params.minp}});
+    res.send(course);
+});
 
 module.exports=router;
