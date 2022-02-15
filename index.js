@@ -16,12 +16,14 @@ let course = new Course({
     isPublished : 'false'
 });
 */
+/*
 let course = new Course({
     title : 'NodeJs',
     author : 'R. Hmida',
     tags : ['back','express','nodejs',],
     isPublished : 'false'
 });
+*/
 
 console.log(course.save());
 
