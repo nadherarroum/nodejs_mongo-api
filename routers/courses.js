@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const { route } = require('express/lib/application');
+const req = require('express/lib/request');
 const {Course, course_validation} = require('../models/course');
 
 // Display all courses
@@ -56,6 +58,13 @@ router.get('/price/in/:minp/:maxp', async (req,res) => {
     //let course = await Course.find({price : {$lte : req.params.maxp, $gte : req.params.minp}});
     let course = await Course.find({price : {$lte : req.params.maxp}})
                              .and({price : {$gte : req.params.minp}});
+    res.send(course);
+});
+
+// Get ALL elts if isPublished truen price over 700
+router.get('/price/published/over/:price', async(req, res) => {
+    let course = await Course.find({price : {$gte : req.params.price}, 
+                                    isPublished : true});
     res.send(course);
 });
 
